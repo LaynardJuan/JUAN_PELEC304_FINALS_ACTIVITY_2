@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Profile{% endblock %} | EduPortal</title>
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <aside class="sidebar">
+        <a class="brand" href="{% url 'students:student_list' %}" aria-label="EduPortal home">
+            <span class="brand-mark">E</span>
+            <span>EduPortal</span>
+        </a>
+        <nav class="nav">
+            <a href="#"><span class="nav-icon">⌂</span> Dashboard</a>
+            <a href="{% url 'students:student_list' %}" class="active"><span class="nav-icon">♙</span> Students</a>
+            <a href="#"><span class="nav-icon">▦</span> Courses</a>
+            <a href="#"><span class="nav-icon">▣</span> Enrollment</a>
+            <a href="/admin/"><span class="nav-icon">⚙</span> Settings</a>
+        </nav>
+        <div class="sidebar-user">
+            <div class="avatar avatar-small">AD</div>
+            <div><strong>Admin User</strong><small>Administrator</small></div>
+            <span class="dots">•••</span>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <span class="mobile-brand">EduPortal</span>
+            <div class="topbar-actions">
+                <button class="icon-button" aria-label="Notifications">♧</button>
+                <div class="avatar">AD</div>
+            </div>
+        </header>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

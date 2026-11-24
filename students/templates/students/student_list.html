@@ -1,0 +1,63 @@
+{% extends 'students/base.html' %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="page-heading">
+        <div>
+            <p class="eyebrow">STUDENT MANAGEMENT</p>
+            <h1>Students</h1>
+        </div>
+        <button class="primary-button"><span>＋</span> Add Student</button>
+    </div>
+
+    <div class="toolbar">
+        <form class="search" method="get">
+            <span>⌕</span>
+            <input type="search" name="q" value="{{ query }}" placeholder="Search by name or student ID">
+        </form>
+        <button class="filter-button"><span>≡</span> Filters <b>2</b></button>
+    </div>
+
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th><span class="checkbox"></span></th>
+                    <th>STUDENT</th>
+                    <th>STUDENT ID</th>
+                    <th>COURSE</th>
+                    <th>YEAR & SECTION</th>
+                    <th>STATUS</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr onclick="window.location='{% url 'students:student_detail' student.id %}'">
+                    <td><span class="checkbox"></span></td>
+                    <td>
+                        <div class="student-cell">
+                            <div class="initial-avatar">{{ student.first_name|first }}{{ student.last_name|first }}</div>
+                            <div><strong>{{ student.last_name }}, {{ student.first_name }}</strong><small>{{ student.email }}</small></div>
+                        </div>
+                    </td>
+                    <td>{{ student.student_id }}</td>
+                    <td>{{ student.course }}</td>
+                    <td>{{ student.year_level }} - {{ student.section }}</td>
+                    <td><span class="status">{{ student.enrollment_status }}</span></td>
+                    <td><a class="row-arrow" href="{% url 'students:student_detail' student.id %}">›</a></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="empty-state">No students found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="table-footer">
+            <span>Showing {{ student_count }} student{{ student_count|pluralize }}</span>
+            <div class="pagination"><button disabled>‹</button><button class="selected">1</button><button>›</button></div>
+        </div>
+    </div>
+</section>
+{% endblock %}

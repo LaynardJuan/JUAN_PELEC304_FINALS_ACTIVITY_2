@@ -1,0 +1,70 @@
+{% extends 'students/base.html' %}
+
+{% block title %}{{ student.first_name }} {{ student.last_name }}{% endblock %}
+
+{% block content %}
+<section class="content detail-content">
+    <a class="back-link" href="{% url 'students:student_list' %}">‹ <span>Back to Students</span></a>
+
+    <div class="profile-header">
+        <div class="profile-main">
+            <div class="profile-avatar">{{ student.first_name|first }}{{ student.last_name|first }}</div>
+            <div>
+                <h1>{{ student.first_name }} {{ student.middle_name }} {{ student.last_name }}</h1>
+                <p>{{ student.course }} <span>•</span> {{ student.year_level }} - {{ student.section }}</p>
+                <span class="status">{{ student.enrollment_status }}</span>
+            </div>
+        </div>
+        <button class="edit-button">✎ Edit Profile</button>
+    </div>
+
+    <div class="profile-grid">
+        <div class="profile-column">
+            <section class="info-card">
+                <div class="card-title"><h2>Personal Information</h2><span>›</span></div>
+                <div class="info-grid">
+                    <div><small>FULL NAME</small><strong>{{ student.first_name }} {{ student.middle_name }} {{ student.last_name }}</strong></div>
+                    <div><small>STUDENT ID</small><strong>{{ student.student_id }}</strong></div>
+                    <div><small>DATE OF BIRTH</small><strong>{{ student.date_of_birth|date:"F d, Y" }}</strong></div>
+                    <div><small>GENDER</small><strong>{{ student.gender }}</strong></div>
+                    <div><small>EMAIL ADDRESS</small><strong>{{ student.email }}</strong></div>
+                    <div><small>PHONE NUMBER</small><strong>{{ student.phone }}</strong></div>
+                    <div class="wide"><small>HOME ADDRESS</small><strong>{{ student.address }}</strong></div>
+                </div>
+            </section>
+
+            <section class="info-card">
+                <div class="card-title"><h2>Enrollment Details</h2><span>›</span></div>
+                <div class="info-grid">
+                    <div><small>COURSE</small><strong>{{ student.course }}</strong></div>
+                    <div><small>YEAR LEVEL</small><strong>{{ student.year_level }}</strong></div>
+                    <div><small>SECTION</small><strong>{{ student.section }}</strong></div>
+                    <div><small>STATUS</small><strong>{{ student.enrollment_status }}</strong></div>
+                </div>
+            </section>
+        </div>
+
+        <aside class="profile-column side-column">
+            <section class="info-card">
+                <div class="card-title"><h2>Guardian Information</h2><span>›</span></div>
+                <div class="contact-person">
+                    <div class="initial-avatar">{{ student.guardian_name|first }}</div>
+                    <div><strong>{{ student.guardian_name }}</strong><small>Guardian</small></div>
+                </div>
+                <div class="side-detail"><small>PHONE NUMBER</small><strong>{{ student.guardian_phone }}</strong></div>
+            </section>
+
+            <section class="info-card">
+                <div class="card-title"><h2>Background</h2><span>›</span></div>
+                <div class="side-detail"><small>PREVIOUS SCHOOL</small><strong>{{ student.previous_school }}</strong></div>
+            </section>
+
+            <section class="info-card activity-card">
+                <div class="card-title"><h2>Recent Activity</h2></div>
+                <div class="activity"><span class="activity-dot"></span><div><strong>Profile Updated</strong><small>2 days ago</small></div></div>
+                <div class="activity"><span class="activity-dot"></span><div><strong>Enrollment Approved</strong><small>August 15, 2026</small></div></div>
+            </section>
+        </aside>
+    </div>
+</section>
+{% endblock %}
